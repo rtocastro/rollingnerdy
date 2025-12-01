@@ -5,17 +5,17 @@ import { Outlet } from 'react-router-dom'
 import Footer from './components/Footer'
 import './App.css'
 
-const express = require('express')
-const app = express()
-const port = process.env.PORT || 4000 
+// const express = require('express')
+// const app = express()
+// const port = process.env.PORT || 4000 
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+// app.get('/', (req, res) => {
+//   res.send('Hello World!')
+// })
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+// app.listen(port, () => {
+//   console.log(`Example app listening on port ${port}`)
+// })
 
 import MainPage from './pages/MainPage'
 
