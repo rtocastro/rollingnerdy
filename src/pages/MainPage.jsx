@@ -1,9 +1,13 @@
-import { Link } from 'react-router-dom'
+import { Outlet } from "react-router"
+import NavTabs from "../components/NavTabs"
 
-export default function MainPage() {
+export default function Entry() {
   return (
     <>
-this is the MAINPAGE page
+this is the main page
+<div>
+<NavTabs />
+</div>
  
     </>
   )
