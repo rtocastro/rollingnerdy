@@ -660,8 +660,8 @@ File locations: ${form.photoFileLocations || "N/A"}
       {journalText && (
         <div style={sectionStyle}>
           <h2>Generated Journal Entry</h2>
-          <textarea
-            readOnly
+          <textarea 
+          readOnly
             style={{ ...inputStyle, height: "240px", whiteSpace: "pre-wrap" }}
             value={journalText}
           />
