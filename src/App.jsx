@@ -1,8 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import careLogo from './assets/journalentryimage.png'
-import './App.css'
 import { Outlet } from 'react-router-dom'
+import Footer from './components/Footer'
+import './App.css'
 
 import MainPage from './pages/MainPage'
 
@@ -12,6 +13,7 @@ function App() {
   return (
     <>
         <Outlet />
+        <Footer />
     </>
   )
 }

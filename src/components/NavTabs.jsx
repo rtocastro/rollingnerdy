@@ -18,7 +18,7 @@ function NavTabs() {
           to="/Contact"
           className={currentPage === '/Contact' ? 'nav-link active' : 'nav-link'}
         >
-          ·Developers
+          ·Contact
         </Link>
       </div>
 

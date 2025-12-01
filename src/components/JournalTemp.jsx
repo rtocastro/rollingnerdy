@@ -78,7 +78,7 @@ const CarAccidentRecoveryLog = () => {
     const text = `
 CAR ACCIDENT RECOVERY LOG
 
-Claim Number: ${form.claimNumber || "N/A"}
+Claimant/Claim Number: ${form.claimNumber || "N/A"}
 Attorney Name / Phone: ${form.attorneyNamePhone || "N/A"}
 Insurance Adjuster / Phone: ${form.adjusterNamePhone || "N/A"}
 Vehicle Status: ${form.vehicleStatus || "N/A"}
@@ -195,7 +195,7 @@ File locations: ${form.photoFileLocations || "N/A"}
       <div style={sectionStyle}>
         <h2>Case Information</h2>
         <label style={labelStyle}>
-          Claim Number:
+          Claimant/Claim Number:
           <input
             style={inputStyle}
             type="text"
@@ -660,6 +660,8 @@ File locations: ${form.photoFileLocations || "N/A"}
       {journalText && (
         <div style={sectionStyle}>
           <h2>Generated Journal Entry</h2>
+          <h4>(be sure to double check info before copying!)
+          </h4>
           <textarea 
           readOnly
             style={{ ...inputStyle, height: "240px", whiteSpace: "pre-wrap" }}
