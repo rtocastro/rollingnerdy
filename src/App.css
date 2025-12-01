@@ -5,6 +5,16 @@
   text-align: center;
 }
 
+.devpic {
+  padding: 5px;
+  justify-content: center;
+  border-radius: white;
+}
+
+.devpic:hover {
+  filter: drop-shadow(0 0 2em #71ff99aa);
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;

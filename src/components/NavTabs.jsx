@@ -10,23 +10,23 @@ function NavTabs() {
           to="/WriteJournal"
           className={currentPage === '/WriteJournal' ? 'nav-link active' : 'nav-link'}
         >
-          -Write In Journal- 
+          ·Write In Journal
         </Link>
       </div>
       <div className="nav-item">
         <Link
-          to="/DevelopedBy"
-          className={currentPage === '/DevelopedBy' ? 'nav-link active' : 'nav-link'}
+          to="/Contact"
+          className={currentPage === '/Contact' ? 'nav-link active' : 'nav-link'}
         >
-          -Developers-
+          ·Developers
         </Link>
-        </div>
-
-
-
-
-
       </div>
+
+
+
+
+
+    </div>
   );
 }
 

@@ -4,7 +4,7 @@ import NavTabs from "../components/NavTabs"
 export default function Entry() {
   return (
     <>
-this is the main page
+-Options-
 <div>
 <NavTabs />
 </div>
