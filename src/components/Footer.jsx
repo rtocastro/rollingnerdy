@@ -6,7 +6,7 @@ export default function Footer() {
     <br>
     </br>
     <br></br>
-<Link to='./DevelopedBy'>Developer</Link>
+<Link to='./DevelopedBy'><h6>Developer</h6></Link>
 
     </>
   )
