@@ -16,6 +16,17 @@ const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+const allowedOrigins = [
+  "http://localhost:5173",                       // dev
+  "https://rollingnerdy.onrender.com",    // prod frontend URL
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+  })
+);
+
 app.post("/api/ask-crash", async (req, res) => {
   const { question } = req.body;
 

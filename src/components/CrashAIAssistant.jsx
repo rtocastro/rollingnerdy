@@ -1,43 +1,43 @@
 import { useState } from "react";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:4000";
+
 export default function CrashAIAssistant() {
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (!question.trim()) return;
+    if (!question.trim()) return;
 
-  setLoading(true);
-  setError("");
-  setAnswer("");
+    setLoading(true);
+    setError("");
+    setAnswer("");
 
-  try {
-    const res = await fetch("http://localhost:4000/api/ask-crash", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ question }),
-});
+    try {
+      const res = await fetch(`${API_BASE_URL}/api/ask-crash`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question }),
+      });
 
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.error || "Request failed");
+      }
 
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      throw new Error(data.error || "Request failed");
+      const data = await res.json();
+      setAnswer(data.answer || "");
+    } catch (err) {
+      console.error(err);
+      setError("Sorry, something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
     }
-
-    const data = await res.json();
-    setAnswer(data.answer || "");
-  } catch (err) {
-    console.error(err);
-    setError("Sorry, something went wrong. Please try again.");
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   return (
     <div className="w-full max-w-xl mx-auto p-6 bg-white rounded-2xl shadow-md">
@@ -45,12 +45,11 @@ const handleSubmit = async (e) => {
         Car Accident AI Assistant
       </h2>
 
-      {/* On-screen disclaimer */}
       <p className="text-xs text-gray-600 mb-4 text-center">
         <strong>Important:</strong> This tool provides general educational
-        information only. It does <span className="font-semibold">not</span> constitute
-        legal advice. Always consult a licensed attorney about your specific
-        situation.
+        information only. It does <span className="font-semibold">not</span>{" "}
+        constitute legal advice. Always consult a licensed attorney about your
+        specific situation.
       </p>
 
       <form onSubmit={handleSubmit}>
