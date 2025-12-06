@@ -9,6 +9,7 @@ import MainPage from './pages/MainPage.jsx';
 import DevelopedBy from './pages/DevelopedBy.jsx';
 import WriteJournal from './pages/WriteJournal.jsx'
 import Contact from './pages/Contact.jsx';
+import CrashAssistant from './pages/CrashAssistant.jsx'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
       {
         path: '/Contact',
         element: <Contact />,
+      },
+      {
+        path: '/CrashAssistant',
+        element: <CrashAssistant />,
       },
 
 

@@ -21,6 +21,14 @@ function NavTabs() {
           ·Contact
         </Link>
       </div>
+      <div className="nav-item">
+        <Link
+          to="/CrashAssistant"
+          className={currentPage === '/CrashAssistant' ? 'nav-link active' : 'nav-link'}
+        >
+          ·Crash Assistant 
+        </Link>
+      </div>
 
 
 
