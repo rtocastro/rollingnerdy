@@ -3,30 +3,25 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import OpenAI from "openai";
+import path from "path";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
-console.log("Has API key?", !!process.env.OPENAI_API_KEY);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
-app.use(cors());
 app.use(express.json());
+
+// CORS – fine to keep open for now, we can tighten later
+app.use(cors());
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const allowedOrigins = [
-  "http://localhost:5173",                       // dev
-  "https://rollingnerdy.onrender.com/",    // prod frontend URL
-];
-
-app.use(
-  cors({
-    origin: allowedOrigins,
-  })
-);
-
+// ---- API ROUTE ----
 app.post("/api/ask-crash", async (req, res) => {
   const { question } = req.body;
 
@@ -54,14 +49,29 @@ app.post("/api/ask-crash", async (req, res) => {
     res.json({ answer: completion.choices[0].message.content });
   } catch (err) {
     console.error("OpenAI error:", err);
+
+    if (err.status === 429 || err.code === "insufficient_quota") {
+      return res.status(429).json({
+        error:
+          "The AI service is temporarily unavailable because the usage limit was reached. Please try again later.",
+      });
+    }
+
     res.status(500).json({
-      error: "AI request failed.",
-      detail: err.message || "Unknown error",
+      error: "AI request failed. Please try again later.",
     });
   }
 });
 
-const PORT = 4000;
+// ---- SERVE FRONTEND BUILD ----
+app.use(express.static(path.join(__dirname, "dist")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
+});
+
+// ---- START SERVER ----
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`✅ AI server running at http://localhost:${PORT}`);
+  console.log(`✅ Server running on port ${PORT}`);
 });
