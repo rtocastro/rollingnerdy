@@ -15,18 +15,18 @@ function NavTabs() {
       </div>
       <div className="nav-item">
         <Link
-          to="/Contact"
-          className={currentPage === '/Contact' ? 'nav-link active' : 'nav-link'}
+          to="/CrashAssistant"
+          className={currentPage === '/CrashAssistant' ? 'nav-link active' : 'nav-link'}
         >
-          ·Contact
+          ·Crash Assistant *under construction*
         </Link>
       </div>
       <div className="nav-item">
         <Link
-          to="/CrashAssistant"
-          className={currentPage === '/CrashAssistant' ? 'nav-link active' : 'nav-link'}
+          to="/Contact"
+          className={currentPage === '/Contact' ? 'nav-link active' : 'nav-link'}
         >
-          ·Crash Assistant 
+          ·Contact
         </Link>
       </div>
 
