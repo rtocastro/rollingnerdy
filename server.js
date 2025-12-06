@@ -63,11 +63,9 @@ app.post("/api/ask-crash", async (req, res) => {
   }
 });
 
-// Serve static files from Vite build
 app.use(express.static(path.join(__dirname, "dist")));
 
-// Catch-all: send index.html for any non-API route
-app.get("/*", (req, res) => {
+app.use((req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
@@ -75,4 +73,5 @@ const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
-    
+
+
