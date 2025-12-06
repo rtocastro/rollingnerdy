@@ -4,7 +4,7 @@ import careLogo from '../assets/journalentryimage.png'
 export default function Entry() {
     return (
         <>
-            <div className="card"> <h3>CARE Journal</h3>
+            <div className="card"> 
             </div>
 
             <div>
