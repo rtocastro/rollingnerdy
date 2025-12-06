@@ -1,55 +1,59 @@
 // server.js
-const express = require('express');
-const { OpenAI } = require('langchain/llms/openai');
-const { PromptTemplate } = require("langchain/prompts");
-const { StructuredOutputParser } = require("langchain/output_parsers");
-require('dotenv').config();
-const bodyParser = require('body-parser');
-const cors = require('cors');
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import OpenAI from "openai";
+
+dotenv.config();
 
 const app = express();
-const port = 3001;
-
-app.use(bodyParser.json());
 app.use(cors());
+app.use(express.json());
 
-const model = new OpenAI({
-    openAIApiKey: process.env.OPENAI_API_KEY,
-    temperature: 0,
-    model: 'gpt-3.5-turbo'
+// Make sure you set OPENAI_API_KEY=your_key in a .env file
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
-const parser = StructuredOutputParser.fromNamesAndDescriptions({
-    code: "Detailed answer that answers the user's question",
-    explanation: "detailed explanation of the example provided",
+app.post("/api/ask-crash", async (req, res) => {
+  const { question } = req.body;
+
+  if (!question || !question.trim()) {
+    return res.status(400).json({ error: "Question is required." });
+  }
+
+  try {
+    const completion = await client.chat.completions.create({
+      model: "gpt-4o-mini", // good cheap general model :contentReference[oaicite:0]{index=0}
+      messages: [
+        {
+          role: "system",
+          content:
+            "You answer general, educational questions about car crashes and public legal information. " +
+            "You are NOT a lawyer and cannot give legal advice. " +
+            "Always include this disclaimer at the end of your answer: " +
+            "'This is not legal advice. For advice about your specific situation, talk to a licensed attorney in your area.' " +
+            "Do not tell users what they 'should' do legally, and do not estimate case value or odds of winning. " +
+            "Focus on explaining general concepts, typical processes, and public info about cases.",
+        },
+        {
+          role: "user",
+          content: question,
+        },
+      ],
+    });
+
+    const answer = completion.choices[0]?.message?.content || "";
+    res.json({ answer });
+  } catch (err) {
+    console.error("OpenAI error:", err);
+    res
+      .status(500)
+      .json({ error: "Something went wrong talking to the AI. Please try again." });
+  }
 });
 
-const formatInstructions = parser.getFormatInstructions();
-
-app.post('/api/ask', async (req, res) => {
-    const input = req.body.question;
-    try {
-        const modelResponse = await model.call(input);
-
-        const prompt = new PromptTemplate({
-            template: "You are an expert on what information is needed during/before and after a car accident in Los Angeles County, California",
-            inputVariables: ["question"],
-            partialVariables: { format_instructions: formatInstructions },
-        });
-
-        const promptInput = await prompt.format({
-            question: input
-        });
-
-        const parsedResponse = await parser.parse(modelResponse);
-
-        res.json({ answer: parsedResponse });
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+  console.log(`AI server listening on http://localhost:${PORT}`);
 });
