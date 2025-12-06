@@ -18,7 +18,7 @@ const client = new OpenAI({
 
 const allowedOrigins = [
   "http://localhost:5173",                       // dev
-  "https://rollingnerdy.onrender.com",    // prod frontend URL
+  "https://rollingnerdy.onrender.com/",    // prod frontend URL
 ];
 
 app.use(
