@@ -178,7 +178,7 @@ File locations: ${form.photoFileLocations || "N/A"}
 
   const labelStyle = { display: "block", marginBottom: "4px", fontWeight: 500 };
   const inputStyle = {
-    width: "95%",
+    width: "90%",
     padding: "8px",
     marginBottom: "8px",
     borderRadius: "4px",

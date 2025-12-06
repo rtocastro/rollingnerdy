@@ -6,7 +6,7 @@ export default function DevelopedBy() {
     <>
 Developed by Ricardo T. Castro
 <div>
-<img src={devrick} className='devpic' />
+<img src={devrick} className='devpic' width={'90%'}/>
  </div>
     </>
   )
