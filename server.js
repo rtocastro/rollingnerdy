@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename);
 const app = express();
 app.use(express.json());
 
-// CORS – fine to keep open for now, we can tighten later
+// CORS – fine to keep open for now, tight later tho
 app.use(cors());
 
 const client = new OpenAI({
@@ -63,15 +63,16 @@ app.post("/api/ask-crash", async (req, res) => {
   }
 });
 
-// ---- SERVE FRONTEND BUILD ----
+// Serve static files from Vite build
 app.use(express.static(path.join(__dirname, "dist")));
 
-app.get("*", (req, res) => {
+// Catch-all: send index.html for any non-API route
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
-// ---- START SERVER ----
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
 });
+    
