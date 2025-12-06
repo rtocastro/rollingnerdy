@@ -169,11 +169,11 @@ File locations: ${form.photoFileLocations || "N/A"}
   };
 
   const sectionStyle = {
-    border: "1px solid #ddd",
+        border: "1px solid #ddd",
     borderRadius: "16px",
     padding: "16px",
     marginBottom: "16px",
-    backgroundColor: "#242424",
+
   };
 
   const labelStyle = { display: "block", marginBottom: "4px", fontWeight: 500 };
