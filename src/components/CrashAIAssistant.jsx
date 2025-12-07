@@ -41,29 +41,33 @@ export default function CrashAIAssistant() {
 
   return (
     <div className="w-full max-w-xl mx-auto p-6 bg-white rounded-2xl shadow-md">
-      <h2 className="text-2xl font-bold mb-2 text-center">
+      <h2 className="Logo text-2xl font-bold mb-2 text-center" >
         Car Accident AI Assistant
       </h2>
 
       <p className="text-xs text-gray-600 mb-4 text-center">
-        <strong>Important:</strong> This tool provides general educational
+        <strong>Important:</strong>
+        <br></br>
+        <font color='red'> This tool provides general educational
         information only. It does <span className="font-semibold">not</span>{" "}
         constitute legal advice. Always consult a licensed attorney about your
-        specific situation.
+        specific situation.</font>
       </p>
 
       <form onSubmit={handleSubmit}>
         <label className="block text-sm font-medium mb-2">
           Ask about your car crash (make sure to include city and state):
         </label>
-
-        <textarea
+<br></br>
+<br></br>
+        <textarea 
           className="w-full h-32 p-3 border rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-black"
           placeholder="Example: Can you explain what usually happens after a rear-end crash on the 405 in Los Angeles, CA?"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
         />
-
+<br></br>
+<br></br>
         <button
           type="submit"
           disabled={loading}
