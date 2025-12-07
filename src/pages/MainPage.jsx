@@ -5,6 +5,10 @@ export default function Entry() {
   return (
     <>
 -Options-
+<br>
+</br>
+<br>
+</br>
 <div>
 <NavTabs />
 </div>
