@@ -18,7 +18,7 @@ function NavTabs() {
           to="/CrashAssistant"
           className={currentPage === '/CrashAssistant' ? 'nav-link active' : 'nav-link'}
         >
-          ·Crash Assistant *under construction*
+          ·Crash Assistant
         </Link>
       </div>
       <div className="nav-item">

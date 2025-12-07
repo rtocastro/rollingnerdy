@@ -8,7 +8,7 @@
 .devpic {
   padding: 5px;
   justify-content: center;
-  border-radius: white;
+  border-radius: white 50%;
 }
 
 .devpic:hover {

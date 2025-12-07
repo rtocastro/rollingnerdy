@@ -41,7 +41,7 @@ export default function CrashAIAssistant() {
 
   return (
     <div className="w-full max-w-xl mx-auto p-6 bg-white rounded-2xl shadow-md">
-      <h2 className="Logo text-2xl font-bold mb-2 text-center" >
+      <h2 className="text-2xl font-bold mb-2 text-center" >
         Car Accident AI Assistant
       </h2>
 
