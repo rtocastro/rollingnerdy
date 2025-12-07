@@ -36,7 +36,7 @@ Comments: ${form.comments || "None provided"}
     padding: "16px",
     maxWidth: "600px",
     margin: "0 auto",
-    backgroundColor: "#242424",
+  
   };
 
   const inputStyle = {

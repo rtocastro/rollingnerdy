@@ -39,6 +39,17 @@ export default function CrashAIAssistant() {
     }
   };
 
+    const AiButtonStyle = {
+    width: "100%",
+    padding: "12px",
+    backgroundColor: "#333",
+    color: "white",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontSize: "16px",
+  };
+
   return (
     <div className="w-full max-w-xl mx-auto p-6 bg-white rounded-2xl shadow-md">
       <h2 className="text-2xl font-bold mb-2 text-center" >
@@ -69,9 +80,10 @@ export default function CrashAIAssistant() {
 <br></br>
 <br></br>
         <button
+          color="turqoise"
           type="submit"
           disabled={loading}
-          className="w-full mt-4 bg-black text-white py-2 rounded-xl hover:opacity-90 disabled:opacity-70 transition"
+          className="w-full mt-4 bg-black text-white py-2 rounded-xl hover:opacity-90 disabled:opacity-70 transition AiButtonStyle"
         >
           {loading ? "Asking AI..." : "Ask AI"}
         </button>
