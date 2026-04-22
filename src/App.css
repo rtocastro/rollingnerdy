@@ -1,52 +1,472 @@
+# RollingNerdy redesign direction
+
+## Goal
+
+Make the site feel **calm, reflective, and personal**—something built for post-crash journaling and recovery tracking, not a portfolio or startup landing page.
+
+## Visual direction
+
+Think:
+
+* soft paper + midnight dashboard
+* subtle motion, not flashy motion
+* rounded cards, muted gradients, readable typography
+* emotionally safe, organized, private-feeling
+
+Suggested palette:
+
+* Background: `#0f172a`
+* Surface: `#111827`
+* Elevated surface: `#1f2937`
+* Soft border: `rgba(255,255,255,0.08)`
+* Primary accent: `#7dd3fc`
+* Secondary accent: `#c4b5fd`
+* Warm highlight: `#f9a8d4`
+* Main text: `#e5eef8`
+* Muted text: `#9fb0c7`
+
+## What should change first
+
+1. Remove the default Vite look in `index.css`.
+2. Stop centering the whole app with `body { display:flex; place-items:center; }`.
+3. Replace the current minimal nav with a softer top bar.
+4. Break the journal form into card sections.
+5. Add a supportive hero area that explains what the journal is for.
+6. Keep the UI professional and steady—more “recovery notebook” than “tech app”.
+
+---
+
+## Paste-ready `src/index.css`
+
+```css
+:root {
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #e5eef8;
+  background:
+    radial-gradient(circle at top left, rgba(125, 211, 252, 0.14), transparent 28%),
+    radial-gradient(circle at top right, rgba(196, 181, 253, 0.12), transparent 24%),
+    linear-gradient(180deg, #0b1220 0%, #0f172a 35%, #101827 100%);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  color: #e5eef8;
+  background: transparent;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  border: 0;
+}
+
 #root {
-  max-width: 1280px;
+  min-height: 100vh;
+}
+```
+
+---
+
+## Paste-ready `src/App.css`
+
+```css
+#root {
+  width: 100%;
+}
+
+.site-shell {
+  width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
-  padding: 2rem;
+  padding: 24px 0 56px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  margin-bottom: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(17, 24, 39, 0.72);
+  backdrop-filter: blur(14px);
+  border-radius: 22px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand-kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9fb0c7;
+}
+
+.brand-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  margin-bottom: 28px;
+}
+
+.hero-card,
+.info-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, rgba(31, 41, 55, 0.88), rgba(17, 24, 39, 0.92));
+  border-radius: 28px;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.28);
+}
+
+.hero-card {
+  padding: 34px;
+}
+
+.hero-card::before,
+.info-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(125, 211, 252, 0.08), transparent 40%, rgba(196, 181, 253, 0.08));
+  pointer-events: none;
+}
+
+.hero h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 4vw, 3.4rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.hero p {
+  max-width: 60ch;
+  margin: 0;
+  color: #b8c7da;
+  font-size: 1rem;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: #dbe7f3;
+}
+
+.pill.primary {
+  background: linear-gradient(135deg, #7dd3fc, #c4b5fd);
+  color: #0b1220;
+  font-weight: 700;
+}
+
+.info-card {
+  padding: 24px;
+}
+
+.info-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.info-panel {
+  padding: 16px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.info-panel h3,
+.info-panel p {
+  margin: 0;
+}
+
+.info-panel h3 {
+  margin-bottom: 6px;
+  font-size: 0.98rem;
+}
+
+.info-panel p {
+  color: #aac0d8;
+  font-size: 0.92rem;
+}
+
+.content-wrap {
+  display: grid;
+  gap: 24px;
+}
+
+.footer-note {
+  margin-top: 28px;
+  color: #8fa3bb;
   text-align: center;
+  font-size: 0.9rem;
 }
 
-.devpic {
-  padding: 5px;
-  justify-content: center;
-  border-radius: white 50%;
-}
-
-.devpic:hover {
-  filter: drop-shadow(0 0 2em #71ff99aa);
-}
-
-.logo {
-  height: 15em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media (max-width: 920px) {
+  .hero {
+    grid-template-columns: 1fr;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 640px) {
+  .site-shell {
+    width: min(100% - 20px, 1180px);
+    padding-top: 16px;
+  }
+
+  .topbar,
+  .hero-card,
+  .info-card {
+    border-radius: 20px;
+  }
+
+  .hero-card {
+    padding: 24px;
   }
 }
+```
 
-.card {
-  padding: 2em;
+---
+
+## Paste-ready `src/App.jsx`
+
+```jsx
+import { Outlet } from 'react-router-dom'
+import './App.css'
+
+function App() {
+  return (
+    <div className="site-shell">
+      <header className="topbar">
+        <div className="brand">
+          <span className="brand-kicker">Recovery journal</span>
+          <span className="brand-title">Rolling Nerdy</span>
+        </div>
+        <div className="pill">Private-feeling recovery notes</div>
+      </header>
+
+      <section className="hero">
+        <div className="hero-card">
+          <h1>Document the days that changed after the crash.</h1>
+          <p>
+            A calm place to track pain, appointments, costs, emotional check-ins,
+            and everything else that becomes easy to forget when life gets thrown off course.
+          </p>
+
+          <div className="hero-actions">
+            <div className="pill primary">Write an entry</div>
+            <div className="pill">Track symptoms</div>
+            <div className="pill">Keep evidence organized</div>
+          </div>
+        </div>
+
+        <aside className="info-card">
+          <div className="info-stack">
+            <div className="info-panel">
+              <h3>Daily clarity</h3>
+              <p>Capture what hurt, what changed, and what got harder.</p>
+            </div>
+            <div className="info-panel">
+              <h3>Case support</h3>
+              <p>Keep a clean record of appointments, receipts, and missed work.</p>
+            </div>
+            <div className="info-panel">
+              <h3>One steady place</h3>
+              <p>Less scattered notes. More structure when your head is already full.</p>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <main className="content-wrap">
+        <Outlet />
+      </main>
+
+      <p className="footer-note">
+        Built for recovery, reflection, and keeping the details together.
+      </p>
+    </div>
+  )
 }
 
-.read-the-docs {
-  color: #888;
+export default App
+```
+
+---
+
+## Paste-ready upgraded `JournalTemp` styling approach
+
+Use CSS classes instead of inline styles. The component can stay functionally similar, but wrap each section in a card like this:
+
+```jsx
+<div className="journal-shell">
+  <section className="journal-section">
+    <div className="section-heading">
+      <span className="section-kicker">Section 01</span>
+      <h2>Case information</h2>
+      <p>Basic details you may need to reference again later.</p>
+    </div>
+    {/* fields here */}
+  </section>
+</div>
+```
+
+And add this CSS:
+
+```css
+.journal-shell {
+  display: grid;
+  gap: 20px;
+}
+
+.journal-section {
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(17, 24, 39, 0.78);
+  border: 1px solid rgba(255,255,255,0.07);
+  box-shadow: 0 16px 42px rgba(0,0,0,0.22);
+}
+
+.section-heading {
+  margin-bottom: 16px;
+}
+
+.section-kicker {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #8fb4d4;
+}
+
+.section-heading h2 {
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+}
+
+.section-heading p {
+  margin: 0;
+  color: #9fb0c7;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  color: #dce7f3;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.04);
+  color: #eef4fb;
+  outline: none;
+  transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: rgba(125, 211, 252, 0.9);
+  background: rgba(255,255,255,0.06);
+}
+
+.field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.journal-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #7dd3fc, #c4b5fd);
+  color: #0b1220;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.action-btn.secondary {
+  background: rgba(255,255,255,0.05);
+  color: #e5eef8;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+@media (max-width: 760px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
 }
