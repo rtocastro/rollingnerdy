@@ -11,6 +11,7 @@ import WriteJournal from './pages/WriteJournal.jsx'
 import Contact from './pages/Contact.jsx';
 import CrashAssistant from './pages/CrashAssistant.jsx'
 
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -41,9 +42,11 @@ const router = createBrowserRouter([
         path: '/CrashAssistant',
         element: <CrashAssistant />,
       },
+      
 
 
     ],
+    
   },
 ]);
 
