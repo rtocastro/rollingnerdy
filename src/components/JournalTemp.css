@@ -1,0 +1,113 @@
+.journal-shell {
+  display: grid;
+  gap: 20px;
+}
+
+.journal-section {
+  padding: 22px;
+  border-radius: 24px;
+  background: rgba(17, 24, 39, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.22);
+}
+
+.section-heading {
+  margin-bottom: 16px;
+}
+
+.section-kicker {
+  display: inline-block;
+  margin-bottom: 8px;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #8fb4d4;
+}
+
+.section-heading h2 {
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+  color: #eef4fb;
+}
+
+.section-heading p {
+  margin: 0;
+  color: #9fb0c7;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.field.full {
+  grid-column: 1 / -1;
+}
+
+.field label {
+  color: #dce7f3;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.field input,
+.field textarea,
+.field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  color: #eef4fb;
+  outline: none;
+  transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+.field input:focus,
+.field textarea:focus,
+.field select:focus {
+  border-color: rgba(125, 211, 252, 0.9);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.output-textarea {
+  min-height: 260px !important;
+  white-space: pre-wrap;
+}
+
+.journal-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #7dd3fc, #c4b5fd);
+  color: #0b1220;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+}
+
+.action-btn:hover {
+  transform: translateY(-1px);
+}
+
+@media (max-width: 760px) {
+  .field-grid {
+    grid-template-columns: 1fr;
+  }
+}
