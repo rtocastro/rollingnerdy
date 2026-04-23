@@ -1,35 +1,24 @@
 import { Outlet } from 'react-router-dom'
 import './App.css'
 import { Link } from "react-router-dom";
+import favpic from "./assets/favicon.png"
 
 function App() {
   return (
     <div className="site-shell">
       <header className="topbar">
         <div className="brand">
+          
+        <span><img src={favpic} alt="Rolling Nerdy logo" className="logo" /></span>
           <span className="brand-kicker">Recovery journal</span>
           <span className="brand-title">Rolling Nerdy</span>
         </div>
-        <div className="pill">Private-feeling recovery notes</div>
+        <div className="pill">Car Accident Recovery Expert</div>
       </header>
 
       <section className="hero">
-        <div className="hero-card">
-          <h1>Document the days that changed after the crash.</h1>
-          <p>
-            A calm place to track pain, appointments, costs, emotional check-ins,
-            and everything else that becomes easy to forget when life gets thrown off course.
-          </p>
 
-          <div className="hero-actions">
-            <Link to="/journal" className="pill primary"> Write an entry</Link>
-            <Link to="/CrashAssistant" className="pill">Crash Assistant</Link>
-            <Link to="/Contact" className="pill">
-            Contact</Link>
-          </div>
-        </div>
-
-        <aside className="info-card">
+                <aside className="info-card">
           <div className="info-stack">
             <div className="info-panel">
               <h3>Daily clarity</h3>
@@ -45,6 +34,23 @@ function App() {
             </div>
           </div>
         </aside>
+
+        <div className="hero-card">
+          <h1>Document the days that changed after the crash.</h1>
+          <p>
+            A calm place to track pain, appointments, costs, emotional check-ins,
+            and everything else that becomes easy to forget when life gets thrown off course.
+          </p>
+
+          <div className="hero-actions">
+            <Link to="/journal" className="pill primary"> Write an entry</Link>
+            <Link to="/CrashAssistant" className="pill">Crash Assistant</Link>
+            <Link to="/Contact" className="pill">
+              Contact</Link>
+          </div>
+        </div>
+
+
       </section>
 
       <main className="content-wrap">
