@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import './App.css'
+import { Link } from "react-router-dom";
 
 function App() {
   return (
@@ -21,8 +22,8 @@ function App() {
           </p>
 
           <div className="hero-actions">
-            <div className="pill primary">Write an entry</div>
-            <div className="pill">Track symptoms</div>
+            <Link to="/journal" className="pill primary"> Write an entry</Link>
+            <Link to="/CrashAssistant" className="pill">Crash Assistant</Link>
             <div className="pill">Keep evidence organized</div>
           </div>
         </div>
