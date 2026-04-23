@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../components/JournalTemp.css";
 
 const FeedbackForm = () => {
   const [form, setForm] = useState({
@@ -24,75 +25,65 @@ Contact (Phone / Social / Email): ${form.contact}
 Comments: ${form.comments || "None provided"}
     `);
 
-    // mailto link generator
     const mailtoLink = `mailto:?subject=${subject}&body=${body}`;
-
     window.location.href = mailtoLink;
   };
 
-  const sectionStyle = {
-    border: "1px solid #ddd",
-    borderRadius: "8px",
-    padding: "16px",
-    maxWidth: "600px",
-    margin: "0 auto",
-  
-  };
-
-  const inputStyle = {
-    width: "95%",
-    padding: "10px",
-    marginBottom: "10px",
-    borderRadius: "6px",
-    border: "1px solid #ccc",
-  };
-
-  const buttonStyle = {
-    width: "100%",
-    padding: "12px",
-    backgroundColor: "#333",
-    color: "white",
-    border: "none",
-    borderRadius: "6px",
-    cursor: "pointer",
-    fontSize: "16px",
-  };
-
   return (
-    <div style={sectionStyle}>
-      <h2 style={{ textAlign: "center", marginBottom: "16px" }}>
-        Contact the Developer
-      </h2>
+    <div className="journal-shell">
+      <section className="journal-section">
+        <div className="section-heading">
+          <span className="section-kicker">Contact</span>
+          <h2>Contact the Developer</h2>
+          <p>
+            Send feedback, suggestions, bug notes, or anything that could help
+            improve the recovery journal.
+          </p>
+        </div>
 
-      <input
-        style={inputStyle}
-        type="text"
-        name="name"
-        placeholder="Your name"
-        value={form.name}
-        onChange={handleChange}
-      />
+        <div className="field-grid">
+          <div className="field">
+            <label htmlFor="name">Your name</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              placeholder="Your name"
+              value={form.name}
+              onChange={handleChange}
+            />
+          </div>
 
-      <input
-        style={inputStyle}
-        type="text"
-        name="contact"
-        placeholder="Phone / Social Handle / Email"
-        value={form.contact}
-        onChange={handleChange}
-      />
+          <div className="field">
+            <label htmlFor="contact">Phone / Social / Email</label>
+            <input
+              id="contact"
+              type="text"
+              name="contact"
+              placeholder="Phone / Social Handle / Email"
+              value={form.contact}
+              onChange={handleChange}
+            />
+          </div>
 
-      <textarea
-        style={{ ...inputStyle, height: "120px" }}
-        name="comments"
-        placeholder="Comments (optional)"
-        value={form.comments}
-        onChange={handleChange}
-      />
+          <div className="field full">
+            <label htmlFor="comments">Comments</label>
+            <textarea
+              id="comments"
+              name="comments"
+              placeholder="Comments, suggestions, bugs, or ideas"
+              value={form.comments}
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
-      <button style={buttonStyle} onClick={handleSubmit}>
-        Send Feedback
-      </button>
+        <div className="journal-actions" style={{ marginTop: "16px" }}>
+          <button className="action-btn" onClick={handleSubmit}>
+            Send Feedback
+          </button>
+        </div>
+      </section>
     </div>
   );
 };
