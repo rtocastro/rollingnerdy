@@ -24,7 +24,8 @@ function App() {
           <div className="hero-actions">
             <Link to="/journal" className="pill primary"> Write an entry</Link>
             <Link to="/CrashAssistant" className="pill">Crash Assistant</Link>
-            <div className="pill">Keep evidence organized</div>
+            <Link to="/Contact" className="pill">
+            Contact</Link>
           </div>
         </div>
 
